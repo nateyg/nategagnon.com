@@ -12,9 +12,8 @@ const SOCIALS = {
 
 const SITE_UPDATED = '7.15'; // bump when content changes
 
-// Paste your Formspree endpoint here to make the early-access form save signups,
-// e.g. 'https://formspree.io/f/abcdwxyz'. Empty = friendly no-op (nothing stored).
-const FORM_ENDPOINT = '';
+// Formspree endpoint — signups POST here and land in gagnon.nate@gmail.com.
+const FORM_ENDPOINT = 'https://formspree.io/f/xykrkjkv';
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
