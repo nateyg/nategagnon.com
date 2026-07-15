@@ -10,6 +10,8 @@ const SOCIALS = {
   instagram: 'https://www.instagram.com/nategeeo',
 };
 
+const SITE_UPDATED = '7.14'; // bump when content changes
+
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── Icons ──
@@ -373,6 +375,10 @@ function contactView() {
     html: `
       <div class="contact-grid">
         <div class="contact-copy">
+          <div class="contact-head">
+            <h1>Nate Gagnon</h1>
+            <div class="contact-updated">Updated ${SITE_UPDATED}</div>
+          </div>
           <p>I'm a Chicago native turned California lifer.</p>
           <p>Throughout my career I've had the pleasure of working at incredible ad agencies, all the big tech companies you've heard of, and small scrappy startups. I currently work at Airbnb.</p>
           <p>My work has been featured in TIME, VICE, the BBC, FiveThirtyEight, NPR, TEDx, and occasionally the front page of Reddit.</p>

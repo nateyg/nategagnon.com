@@ -627,29 +627,20 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 /* ─────────────────────────────────────────────
    CONTACT PAGE
    ───────────────────────────────────────────── */
-.contact-copy {
-  padding: 128px 2px 40px;
-  max-width: 400px;
+.contact-head { margin-bottom: 22px; }
+.contact-head h1 {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
-.contact-copy p {
-  font-size: 14.5px;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 15px;
+.contact-updated {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--muted);
 }
-.contact-copy p:last-child { margin-bottom: 0; }
-
-.contact-hero {
-  padding: 100px 26px 40px;
-  text-align: center;
-  font-size: clamp(13.5px, calc((100vw - 108px) / 18.4), 18px);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  font-weight: 400;
-  color: var(--ink);
-}
-.contact-hero strong { font-weight: 700; color: var(--ink); }
 
 .contact-row {
   display: flex;
