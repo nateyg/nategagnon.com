@@ -678,7 +678,13 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 /* ─────────────────────────────────────────────
    DESKTOP
    ───────────────────────────────────────────── */
-/* contact copy (all sizes) */
+/* contact layout: stacked on mobile, copy|cards split on desktop */
+.contact-grid {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
 .contact-copy {
   padding: 128px 2px 40px;
   max-width: 400px;
@@ -731,14 +737,23 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
   .container { max-width: 560px; }
   .bio-wrap { max-width: 780px; }
-  /* centered intro copy at a comfortable reading measure */
-  .contact-copy {
-    max-width: 560px;
-    margin: 0 auto;
-    text-align: center;
+  /* contact: copy column left, cards column right */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(64px, 8vw, 150px);
+    align-items: start;
+    max-width: 1160px;
+    padding: 0 56px;
+    margin-top: 160px;
   }
-  .contact-copy p { text-wrap: balance; }
-  .contact-copy p { font-size: 16px; }
+  .contact-cards { min-width: 0; }
+  .contact-copy {
+    padding: 6px 0 0; /* first line optically level with the cards' label */
+    max-width: 400px;
+  }
+  .contact-copy p { font-size: 16px; line-height: 1.5; margin-bottom: 18px; }
+  .contact-cards .early-card { margin-bottom: 0; }
 }
 
 /* ─────────────────────────────────────────────
