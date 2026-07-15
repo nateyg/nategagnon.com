@@ -197,6 +197,16 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   .contact-pill:hover { background: var(--ink); color: var(--bg); }
 }
 
+/* "Updated x.xx" stamp that replaces the pill on the contact page */
+.nav-updated {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  user-select: none;
+}
+.nav-updated[hidden] { display: none; }
+
 /* ─────────────────────────────────────────────
    LAYOUT / VIEWS
    ───────────────────────────────────────────── */
@@ -206,7 +216,9 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   padding: 0 var(--page-pad);
 }
 
-#view { position: relative; }
+/* flow-root contains the hero's margin-top so it can't collapse out to the
+   document root — which was inflating scroll height into empty gray on mobile */
+#view { position: relative; display: flow-root; }
 
 .view-panel { touch-action: pan-y; }
 
@@ -412,7 +424,11 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .tag {
   font-family: var(--mono);
   font-size: 11px;
-  padding: 5px 12px 6px;
+  display: inline-flex;
+  align-items: center;
+  height: 23px;
+  padding: 0 12px;
+  line-height: 1;
   border-radius: 100px;
   background: var(--tag-bg);
   color: var(--tag-ink);
@@ -561,7 +577,12 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   padding: 28px 26px 26px;
   box-shadow: 0 18px 40px -18px rgba(20,18,14,0.14);
   margin: 28px 0 48px;
+  /* uniform height across projects; buttons anchor to the bottom */
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
 }
+.project-actions { margin-top: auto; }
 
 .project-head {
   display: flex;

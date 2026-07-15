@@ -12,6 +12,10 @@ const SOCIALS = {
 
 const SITE_UPDATED = '7.15'; // bump when content changes
 
+// Paste your Formspree endpoint here to make the early-access form save signups,
+// e.g. 'https://formspree.io/f/abcdwxyz'. Empty = friendly no-op (nothing stored).
+const FORM_ENDPOINT = '';
+
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── Icons ──
@@ -169,13 +173,35 @@ function footerHTML({ socials = true } = {}) {
 function bindEmailForm(panel) {
   const form = panel.querySelector('#email-form');
   if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = form.querySelector('.email-input');
-    // TODO: wire to a real list service (Formspree/Buttondown)
+  const input = form.querySelector('.email-input');
+  const note = (msg) => {
     input.value = '';
-    input.placeholder = 'thanks! talk soon :)';
-    setTimeout(() => { input.placeholder = 'enter your email'; }, 3000);
+    input.placeholder = msg;
+    setTimeout(() => { input.placeholder = 'enter your email'; }, 3500);
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = input.value.trim();
+    if (!email) return;
+
+    // no endpoint configured yet → friendly acknowledgement, nothing stored
+    if (!FORM_ENDPOINT) { note('thanks! talk soon :)'); return; }
+
+    input.disabled = true;
+    input.placeholder = 'sending…';
+    try {
+      const r = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, _subject: 'new early-access signup — nategagnon.com' }),
+      });
+      input.disabled = false;
+      note(r.ok ? 'thanks! talk soon :)' : 'hmm — try again?');
+    } catch (_) {
+      input.disabled = false;
+      note('hmm — try again?');
+    }
   });
 }
 
@@ -377,7 +403,6 @@ function contactView() {
         <div class="contact-copy">
           <div class="contact-head">
             <h1>Nate Gagnon</h1>
-            <div class="contact-updated">Updated ${SITE_UPDATED}</div>
           </div>
           <p>I'm a Chicago native turned California lifer.</p>
           <p>Throughout my career I've had the pleasure of working at incredible ad agencies, all the big tech companies you've heard of, and small scrappy startups. I currently work at Airbnb.</p>
@@ -460,7 +485,13 @@ function render() {
   // update bug + contact pill (crossfade the swap in both directions)
   setBug(view.bug, firstRender);
   // visibility (not display) — the pill's box must keep the nav height stable
-  document.getElementById('nav-contact').style.visibility = hash === '#/contact' ? 'hidden' : '';
+  // contact page swaps the "contact" pill for an "Updated x.xx" stamp
+  const onContact = hash === '#/contact';
+  const pill = document.getElementById('nav-contact');
+  const upd = document.getElementById('nav-updated');
+  pill.hidden = onContact;
+  upd.hidden = !onContact;
+  if (onContact) upd.textContent = `Updated ${SITE_UPDATED}`;
 
   window.scrollTo({ top: 0, behavior: 'instant' });
   if (!hash.startsWith('#/p/')) setChevrons(null);
