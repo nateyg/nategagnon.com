@@ -10,7 +10,7 @@ const SOCIALS = {
   instagram: 'https://www.instagram.com/nategeeo',
 };
 
-const SITE_UPDATED = '7.14'; // bump when content changes
+const SITE_UPDATED = '7.15'; // bump when content changes
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
