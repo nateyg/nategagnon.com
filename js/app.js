@@ -65,15 +65,17 @@ async function loadWeather() {
   try {
     const r = await fetch(
       'https://api.open-meteo.com/v1/forecast?latitude=37.8044&longitude=-122.2712' +
-      '&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles'
+      '&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles'
     );
     const d = await r.json();
     const t = Math.round(d.current.temperature_2m);
     const code = d.current.weather_code;
-    let desc = 'sunny';
+    const isDay = d.current.is_day === 1;
+    let desc;
     if (code >= 51) desc = 'rainy';
     else if (code === 3) desc = 'cloudy';
-    else if (code >= 1) desc = 'partly cloudy';
+    else if (code >= 1) desc = 'partly cloudy';   // clouds read fine day or night
+    else desc = isDay ? 'sunny' : 'clear night';  // clear sky is only "sunny" by day
     weather = { label: `${desc} ${t}°F` };
   } catch (_) { /* bug just keeps greeting */ }
 }
