@@ -204,6 +204,10 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   letter-spacing: 0.02em;
   color: var(--ink);
   user-select: none;
+  /* match the contact-pill's box height so the nav (and the home bug)
+     sit at the same position as on every other page */
+  padding: 7px 0 6px;
+  border: 1px solid transparent;
 }
 .nav-updated[hidden] { display: none; }
 
