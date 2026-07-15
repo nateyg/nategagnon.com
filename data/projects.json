@@ -1,0 +1,65 @@
+{
+  "projects": [
+    {
+      "slug": "checkmate-fm",
+      "name": "Checkmate.fm",
+      "tag": "web",
+      "status": "live",
+      "icon": "checkmate",
+      "description": "I turned a game of chess into a generative musical instrument. Every move, capture, check, and checkmate add to a unique song. Play a game and try it for yourself.",
+      "links": [
+        {
+          "label": "visit site",
+          "url": "https://www.checkmate.fm",
+          "style": "filled"
+        }
+      ]
+    },
+    {
+      "slug": "crosstalkie",
+      "name": "Crosstalkie",
+      "tag": "iOS",
+      "status": "live",
+      "icon": "ctradio",
+      "description": "I love doing crosswords with my mom, so I made a 2-player crossword puzzle app. It's got a built-in walkie-talkie, so you can tackle challenging daily puzzles, together.",
+      "links": [
+        {
+          "label": "visit site",
+          "url": "https://www.crosstalkie.app",
+          "style": "filled"
+        },
+        {
+          "label": "join TestFlight",
+          "url": "https://testflight.apple.com/join/BJcKNVgD",
+          "style": "outline",
+          "icon": "testflight"
+        }
+      ]
+    },
+    {
+      "slug": "moontube",
+      "name": "MoonTube",
+      "tag": "iOS",
+      "status": "live",
+      "icon": "moontile",
+      "description": "I always wanted to turn the moon into a QR code, so I did. No reason, really. But now you can scan the moon and watch space videos.",
+      "links": [
+        {
+          "label": "join TestFlight",
+          "url": "https://testflight.apple.com/join/72Ejgvzk",
+          "style": "outline",
+          "icon": "testflight"
+        }
+      ]
+    },
+    {
+      "slug": "archie",
+      "name": "Archie",
+      "tag": "web",
+      "status": "coming soon",
+      "icon": null,
+      "description": "",
+      "links": []
+    }
+  ]
+}
