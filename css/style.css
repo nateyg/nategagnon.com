@@ -581,9 +581,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   padding: 28px 26px 26px;
   box-shadow: 0 18px 40px -18px rgba(20,18,14,0.14);
   margin: 28px 0 48px;
-  /* uniform height across projects, set to the tallest natural card so
-     none get inflated; buttons stay directly under the description */
-  min-height: 300px;
+  /* no forced height — card height tracks description line count; buttons are
+     normalized to a fixed height so same-line-count cards match exactly */
 }
 
 .project-head {
@@ -622,11 +621,16 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.02em;
-  padding: 12px 13px 13px;
+  /* fixed height (border-box) so filled and outline buttons are identical —
+     otherwise the outline border makes 2-button cards taller than 1-button
+     cards, and card height should track description line count, not buttons */
+  height: 40px;
+  padding: 0 15px;
   border-radius: 13px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   transition: transform 160ms var(--ease-out), background 180ms ease,
               color 180ms ease, border-color 180ms ease;
