@@ -53,6 +53,21 @@
       ]
     },
     {
+      "slug": "lenny",
+      "name": "Lenny",
+      "tag": "mac",
+      "status": "live",
+      "icon": "lenny2",
+      "description": "The future isn't software, it's memeware. I turned a scene from The Simpsons into a timer and screensaver for your Claude Code usage. Please don't tell anyone how I live.",
+      "links": [
+        {
+          "label": "visit site",
+          "url": "https://nateyg.github.io/lenny/",
+          "style": "filled"
+        }
+      ]
+    },
+    {
       "slug": "archie",
       "name": "Archie",
       "tag": "web",

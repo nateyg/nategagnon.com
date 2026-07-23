@@ -301,6 +301,59 @@
       return g;
     },
 
+    lenny: function (THREE, mat) { return BUILDERS._lenny(THREE, mat, 0.18); },
+
+    lenny2: function (THREE, mat) { return BUILDERS._lenny(THREE, mat, 0); },
+
+    _lenny: function (THREE, mat, dz) {
+      var g = new THREE.Group();
+      function eye(cx, cz, pupX) {
+        var e = new THREE.Group();
+        var R = 1.0, ee = 0.14, half = 0.26;
+        var dg = new THREE.Group();
+        dg.add(new THREE.Mesh(new THREE.CylinderGeometry(R, R, 2 * (half - ee), 96), mat));
+        dg.add(new THREE.Mesh(new THREE.CylinderGeometry(R - ee, R - ee, 2 * half, 96), mat));
+        for (var ti = 0; ti < 2; ti++) {
+          var edge = new THREE.Mesh(new THREE.TorusGeometry(R - ee, ee, 24, 96), mat);
+          edge.rotation.x = Math.PI / 2;
+          edge.position.y = ti === 0 ? half - ee : -(half - ee);
+          dg.add(edge);
+        }
+        dg.rotation.x = Math.PI / 2;
+        e.add(dg);
+        // sleepy lid + pupil on front and back faces
+        var cy = -2.6, r = 2.65, w = 0.055, d = 0.25;
+        for (var fi = 0; fi < 2; fi++) {
+          var dir = fi === 0 ? 1 : -1;
+          var face = new THREE.Group();
+          var ring = new THREE.Shape();
+          ring.absarc(0, 0, 0.82, 0, TAU, false);
+          var hole = new THREE.Path();
+          hole.absarc(0, 0, 0.70, 0, TAU, true);
+          ring.holes.push(hole);
+          face.add(extrude(THREE, ring, mat, { depth: 0.03, bevelThickness: 0.035, bevelSize: 0.03, bevelSegments: 3 }));
+          var a1 = Math.PI / 2 - d, a2 = Math.PI / 2 + d;
+          var lid = new THREE.Shape();
+          lid.absarc(0, cy, r + w, a1, a2, false);
+          lid.absarc(0, cy, r - w, a2, a1, true);
+          var lm = extrude(THREE, lid, mat, { depth: 0.04, bevelThickness: 0.04, bevelSize: 0.032, bevelSegments: 3 });
+          face.add(lm);
+          var pup = new THREE.Mesh(new THREE.SphereGeometry(0.13, 24, 16), mat);
+          pup.scale.z = 0.55;
+          pup.position.set(pupX, -0.10, 0.03);
+          face.add(pup);
+          if (dir === -1) face.rotation.y = Math.PI;
+          face.position.z = dir === 1 ? 0.22 : -0.22;
+          e.add(face);
+        }
+        e.position.set(cx, 0, cz);
+        return e;
+      }
+      g.add(eye(-0.85, dz, 0.26));  // viewer-left eye
+      g.add(eye(0.85, -dz, -0.12)); // right eye
+      return g;
+    },
+
     hiword: function (THREE, mat) {
       var g = new THREE.Group();
       var w = 0.26, r = 0.14, R = r + w, y0 = 0.1, yB = -0.72, yT = 0.78;
@@ -390,7 +443,7 @@
     return SHARED;
   }
 
-  var PHASE = { moon: -0.55, walkie: 0.45, knight: -0.25, bookmark: 0.85, ctradio: 0.3, hncircle: -0.4, hncircle2: -0.4, moontile: 0.6, checkmate: -0.15, hiword: 0.35 };
+  var PHASE = { moon: -0.55, walkie: 0.45, knight: -0.25, bookmark: 0.85, ctradio: 0.3, hncircle: -0.4, hncircle2: -0.4, moontile: 0.6, checkmate: -0.15, lenny: 0.3, lenny2: 0.3, hiword: 0.35 };
 
   var FINISH = {
     mirror: { roughness: 0.07, clearcoatRoughness: 0.04 },
